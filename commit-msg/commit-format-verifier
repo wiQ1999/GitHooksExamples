@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+message_file = ARGV[0]
+message = File.read(message_file)
+
+$regex = /^(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9\-]+\))?!?: .+(\n|$)/
+
+if !$regex.match(message)
+  puts "[POLICY] Your message is not complay with Conventional Commits 1.0.0"
+  exit 1
+end
